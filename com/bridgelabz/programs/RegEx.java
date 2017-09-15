@@ -1,5 +1,7 @@
 package com.bridgelabz.programs;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,21 +14,21 @@ public class RegEx {
 		// TODO Auto-generated method stub
 		Scanner sc=new Scanner(System.in);
 		RegEx reg=new RegEx();
-		
+		Date date=new Date();
+		SimpleDateFormat format=new SimpleDateFormat("dd/MM/yyyy");
+		String date2=format.format(date);
 		System.out.println("Enter your name ");
-		String name=sc.nextLine().trim();
+		String name=sc.nextLine();
 		System.out.println("Enter your full name ");
 		String fullName=sc.nextLine();
 		System.out.println("Enter your Contact number");
 		String contact=sc.nextLine();
-		System.out.println("Enter todays date");
-		String date=sc.next();
 		reg.replaceString("<<name>>", name);
 		reg.replaceString("<<full​ ​ name>>​", fullName);
 		reg.replaceString("xxxxxxxxxx",contact);
-		reg.replaceString("01/01/2016", date);
+		reg.replaceString("01/01/2016",date2);
 		System.out.println(message);
-		
+		sc.close();
 	}
 	public void replaceString(String toReplace,String replaceWith){
 		Pattern pattern=Pattern.compile(toReplace);
