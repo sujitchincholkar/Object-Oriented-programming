@@ -21,18 +21,18 @@ import com.bridgelabz.utility.Utility;
 public class JsonInventory {
 	public static void main(String args[]) throws FileNotFoundException, IOException, ParseException{
 		Scanner scanner=new Scanner(System.in);
-		JSONArray inventory=new JSONArray();
+		JSONArray inventory=new JSONArray(); 
 		JSONObject inventoryObj=new JSONObject();
-		
-		System.out.println("What do you want to do \n1.Write Inventory\n2.Read from file");
+		String items[]={"Rice","Wheat","Pulses"};
+		System.out.println("What do you want to do \n1.Write Inventory\n2.Read total value");
 		int choice=scanner.nextInt();
 		if(choice==1){
-		inventory=Utility.getInventory();
+		inventoryObj=Utility.getInventory(items);
 		try{
 			FileWriter writer = new FileWriter("/home/bridgeit/Documents/JsonDoc.json", false);
 			PrintWriter out = new PrintWriter(writer);
-			out.write(inventory.toJSONString());
-			System.out.println(inventory.toJSONString());
+			out.write(inventoryObj.toJSONString());
+			System.out.println(inventoryObj.toJSONString());
 			out.close();
 			writer.close();
 		}catch(Exception e){
@@ -41,8 +41,8 @@ public class JsonInventory {
 		}else{
 			JSONParser jsonParser=new JSONParser();
 			FileReader reader=new FileReader("/home/bridgeit/Documents/JsonDoc.json");
-			 inventory=(JSONArray)jsonParser.parse(reader);
-			Utility.calculateValue(inventory);
+			 inventoryObj=(JSONObject)jsonParser.parse(reader);
+			Utility.calculateValue(inventoryObj,items);
 		}
 	}
 }
