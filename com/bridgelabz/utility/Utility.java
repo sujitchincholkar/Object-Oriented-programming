@@ -68,7 +68,32 @@ public class Utility {
 		return jsonObject;
 		
 	}
+	public static JSONArray readJSONArray(String file){
+		JSONParser jsonParser=new JSONParser();
+		FileReader reader;
+		JSONArray jsonObject=new JSONArray();
+		try {
+			reader = new FileReader(file);
+			jsonObject=(JSONArray)jsonParser.parse(reader);
+			reader.close();
+		} catch ( IOException | ParseException e) {
+			e.printStackTrace();
+		}
+		return jsonObject;
+		
+	}
 	public static void writeJSONFile(String  file,JSONObject jsonObject){
+		FileWriter writer;
+		try {
+			writer = new FileWriter(file, false);
+			PrintWriter out = new PrintWriter(writer);
+			out.write(jsonObject.toJSONString());
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+	}
+	public static void writeJSONFile(String  file,JSONArray jsonObject){
 		FileWriter writer;
 		try {
 			writer = new FileWriter(file, false);

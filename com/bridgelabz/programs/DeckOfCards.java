@@ -6,7 +6,9 @@ public class DeckOfCards {
 	Card cards[];
 	String suits[]={"Club","Diamond", "Heart", "Spade"};
 	String ranks[]={"2", "3", "4", "5", "6", "7", "8", "9", "10","Jack", "Queen", "King", "Ace"};
-	
+	public DeckOfCards(){
+		cards=initializeCards();
+	}
 	public void shuffle(Card[] cards){
 		Random random=new Random();
 		Card card;
@@ -30,11 +32,12 @@ public class DeckOfCards {
 		return cards;
 	}
 	public void alotCards(Card players[][]){
-		int cardIndex=0;
+		int playersIndex=0;
+		shuffle(this.cards);
 		for(int i=0;i<players.length;i++){
 			for(int j=0;j<players[i].length;j++){
-				players[i][j]=cards[cardIndex];
-				cardIndex++;
+				players[i][j]=cards[playersIndex];
+				playersIndex++;
 			}
 		}
 	}
@@ -49,15 +52,13 @@ public class DeckOfCards {
 	}
 	public static void main(String args[]){
 		DeckOfCards deckOfCards=new DeckOfCards();
-		deckOfCards.cards=deckOfCards.initializeCards();
-		Card players[][]=new Card[4][13];
-		deckOfCards.shuffle(deckOfCards.cards);
+		Card players[][]=new Card[4][9];
+		deckOfCards.alotCards(players);
 		System.out.println("After Shuffle");
-		System.out.println(deckOfCards.cards.length);
 		for(int i=0;i<deckOfCards.cards.length;i++){
 			System.out.print(deckOfCards.cards[i].suit+"-"+deckOfCards.cards[i].rank+" ");
 		}
-		deckOfCards.alotCards(players);
+		System.out.println();
 		System.out.println("Cards received by players");
 		deckOfCards.display(players);
 	}
