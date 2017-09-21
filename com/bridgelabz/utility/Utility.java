@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -54,6 +55,14 @@ public class Utility {
 			}
 		}
 	}
+	public static void displayJson(JSONObject object){
+		Set keyList =  object.keySet();
+		String[] keys = (String[]) keyList.toArray(new String[keyList.size()]);
+		for(int i=0;i<keys.length;i++){
+			System.out.println(keys[i]+"="+object.get(keys[i]));
+		}
+		System.out.println("================");
+	}
 	public static JSONObject readJSONFile(String file){
 		JSONParser jsonParser=new JSONParser();
 		FileReader reader;
@@ -82,6 +91,10 @@ public class Utility {
 		return jsonObject;
 		
 	}
+	/**This method writes Json object in specified file
+	 * @param file       -file to write json object
+	 * @param jsonObject -Json object to write in file	
+	 */
 	public static void writeJSONFile(String  file,JSONObject jsonObject){
 		FileWriter writer;
 		try {
@@ -93,12 +106,16 @@ public class Utility {
 			e.printStackTrace();
 		}	
 	}
-	public static void writeJSONFile(String  file,JSONArray jsonObject){
+	/**This method writes Json object in specified file
+	 * @param file       -file to write json object
+	 * @param jsonArray -Json object to write in file	
+	 */
+	public static void writeJSONFile(String  file,JSONArray jsonArray){
 		FileWriter writer;
 		try {
 			writer = new FileWriter(file, false);
 			PrintWriter out = new PrintWriter(writer);
-			out.write(jsonObject.toJSONString());
+			out.write(jsonArray.toJSONString());
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -157,4 +174,110 @@ public class Utility {
 			e.printStackTrace();
 		}
 	}
+	/**This method reads specified file to check json object
+	 * @param doctorFile -
+	 */
+	public static void searchDoctor(String doctorFile) {
+		String searchBy[]={"Name","Id","Specilization","Availability"};
+		System.out.println("Search doctor by:\n1.Name\n2.Id\n3.Specilization\n4.Availability");
+		int choice =scanner.nextInt();
+		System.out.println("Enter "+searchBy[choice-1]+" you want");
+		String valueToSearch=scanner.next();
+		JSONArray doctorList=readJSONArray(doctorFile);
+		int presentAtIndex=isPresent(doctorList,searchBy[choice-1],valueToSearch);
+		if((presentAtIndex)>=0){
+			JSONObject doctor=(JSONObject) doctorList.get(presentAtIndex);
+			displayJson(doctor);
+		}else{
+			System.out.println("Doctor with "+searchBy[choice-1]+"="+valueToSearch+
+					" is not present");
+		}
+		
+		
+	}
+	public static int isPresent(JSONArray doctorList, String key,
+			String valueToSearch) {
+		int presentAt=-1;
+		for(int index=0;index<doctorList.size();index++){
+			JSONObject doctor=(JSONObject) doctorList.get(index);
+			if(doctor.get(key).equals(valueToSearch)){
+				presentAt=index;
+				break;
+			}
+		}
+		return presentAt;
+	}
+	public static void searchPatient(String patientFile) {
+		String searchBy[]={"Name","Id","Specilization","Availability"};
+		System.out.println("Search doctor by:\n1.Name\n2.Id\n3.Specilization\n4.Availability");
+		int choice =scanner.nextInt();
+		System.out.println("Enter "+searchBy[choice-1]+" you want");
+		String valueToSearch=scanner.next();
+		JSONArray patientList=readJSONArray(patientFile);
+		int presentAtIndex=isPresent(patientList,searchBy[choice-1],valueToSearch);
+		if((presentAtIndex)>=0){
+			JSONObject doctor=(JSONObject) patientList.get(presentAtIndex);
+			displayJson(doctor);
+		}else{
+			System.out.println("Patient with "+searchBy[choice-1]+"="+valueToSearch+
+					" is not found");
+		}
+		
+	}
+	public static void appoint(String doctorFile, String patientFile) {
+		System.out.println("With whom you want to take appointment");
+		String name=scanner.next();
+		JSONArray doctorList=readJSONArray(doctorFile);
+		JSONObject doctor;
+		int index=isPresent(doctorList,"Name",name);
+		if(index>=0){
+			doctor=(JSONObject) doctorList.get(index);
+			if(doctor.get("Name").equals(name)){
+				if(Integer.parseInt(doctor.get("Appointments")+"")<5){
+					JSONArray patientList=(JSONArray) doctor.get("Patients");
+					System.out.println(doctor.toJSONString());
+					doctor.remove("Patients");
+					getPatientDetials(patientList);
+					doctor.put("Patients",patientList);
+					doctor.put("Appointments",Integer.parseInt((doctor.get("Appointments"))+"")+1);
+					writeJSONFile(doctorFile,doctorList);
+					writeJSONFile(patientFile,patientList);
+				}else {
+					System.out.println("Sorry Dr."+name+" is not available");
+				}
+			}
+		}else{
+			System.out.println("You might have enter wrong name try again ");
+		}
+		
+	}
+	private static JSONArray getPatientDetials(JSONArray patientList) {
+		JSONObject patient=new JSONObject();
+		String keys[]={"Name","Id","Mobile_No","Age"};
+		for(int index=0;index<keys.length;index++){
+			System.out.println("Enter "+keys[index]);
+			String value=scanner.next();
+			patient.put(keys[index], value);
+		}
+		patientList.add(patient);
+		return patientList;
+	}
+	public static void enterDoctor(String doctorFile) {
+		JSONObject doctor=new JSONObject();
+		String keys[]={"Name","Id","Specilization","Availability"};
+		for(int index=0;index<keys.length;index++){
+			System.out.println("Enter "+keys[index]);
+			String value=scanner.next();
+			doctor.put(keys[index], value);
+		}
+		doctor.put("Appointments",0 );
+		
+		JSONArray patientList=new JSONArray();
+		doctor.put("Patients", patientList);
+		JSONArray doctorsList=readJSONArray(doctorFile);
+		doctorsList.add(doctor);
+		writeJSONFile(doctorFile,doctorsList);
+	}
+	
+	
 }

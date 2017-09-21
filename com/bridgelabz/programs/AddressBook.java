@@ -14,7 +14,8 @@ public class AddressBook {
 		AddressBook book=new AddressBook();
 		String file="/home/bridgeit/Documents/AddressBook";
 		book.display(Utility.readJSONArray(file));
-		System.out.println("Enter your choice \n1.Add \n2.Edit \n3.Delete \n4.Sort By Name");
+		System.out.println("Enter your choice \n1.Add \n2.Edit \n3.Delete \n4.Sort By Name "
+				+ "\n5.Search By Name");
 		int choice=scanner.nextInt();
 		switch(choice){
 		case 1:
@@ -29,7 +30,24 @@ public class AddressBook {
 		case 4:
 			book.sortByName(file);
 			break;
+		case 5:
+			book.search(file);
+			break;
 		}
+	}
+	public void search(String file) {
+		System.out.println("Enter name to search");
+		String valueToSearch=scanner.next();
+		JSONArray addressList=Utility.readJSONArray(file);
+		int presentAtIndex=Utility.isPresent(addressList,"firstname",valueToSearch);
+		if((presentAtIndex)>=0){
+			System.out.println("Record is present");
+			JSONObject record=(JSONObject) addressList.get(presentAtIndex);
+			Utility.displayJson(record);
+		}else{
+			System.out.println("Record is not present");
+		}
+		
 	}
 	public  void sortByName(String file) {
 		JSONArray bookRecords=Utility.readJSONArray(file);
