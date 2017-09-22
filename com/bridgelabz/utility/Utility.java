@@ -1,3 +1,10 @@
+/***********************************************
+ * purpose : To store all logic of the programs
+ *           
+ * @author  Sujit Chincholkar
+ * @version 1.0
+ * @since   24/08/2017          
+ ***********************************************/
 package com.bridgelabz.utility;
 
 import java.io.BufferedReader;
@@ -44,6 +51,10 @@ public class Utility {
 		}
 		return inventoryObj;
 	}
+	/**This method calculates and prints value 
+	 * @param inventoryObj
+	 * @param items
+	 */
 	public static void calculateValue(JSONObject inventoryObj,String items[]) {
 		for(int j=0;j<items.length;j++){
 			JSONArray inventory=(JSONArray) inventoryObj.get(items[j]);
@@ -55,6 +66,9 @@ public class Utility {
 			}
 		}
 	}
+	/**This method displays given JSONObject with key and its value
+	 * @param object
+	 */
 	public static void displayJson(JSONObject object){
 		Set keyList =  object.keySet();
 		String[] keys = (String[]) keyList.toArray(new String[keyList.size()]);
@@ -208,8 +222,8 @@ public class Utility {
 		return presentAt;
 	}
 	public static void searchPatient(String patientFile) {
-		String searchBy[]={"Name","Id","Specilization","Availability"};
-		System.out.println("Search doctor by:\n1.Name\n2.Id\n3.Specilization\n4.Availability");
+		String searchBy[]={"Name","Id","Mobile_No","Age"};
+		System.out.println("Search Patient by:\n1.Name\n2.Id\n3.Mobile No\n4.Age");
 		int choice =scanner.nextInt();
 		System.out.println("Enter "+searchBy[choice-1]+" you want");
 		String valueToSearch=scanner.next();

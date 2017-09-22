@@ -1,3 +1,12 @@
+/***********************************************
+ * Purpose :. This program Shuffle the cards using Random method and then distribute 9 Cards 
+ * 			  to 4 Players and Print the Cards the received by the 4 Players using 
+ * 			  2D Array.​
+ *           
+ * @author  Sujit Chincholkar
+ * @version 1.0
+ * @since   24/08/2017          
+ ***********************************************/
 package com.bridgelabz.programs;
 
 import java.util.Random;

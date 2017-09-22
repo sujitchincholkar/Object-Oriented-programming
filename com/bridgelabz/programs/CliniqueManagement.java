@@ -1,3 +1,11 @@
+/***********************************************
+ * Purpose :This program take search doctor and patient and allow to take 
+ * 			appointment​
+ *           
+ * @author  Sujit Chincholkar
+ * @version 1.0
+ * @since   24/08/2017          
+ ***********************************************/
 package com.bridgelabz.programs;
 
 import java.util.Scanner;
@@ -13,8 +21,7 @@ public class CliniqueManagement {
 
 		String wantToContinue = "yes";
 		while (wantToContinue.equals("yes")) {
-			System.out
-					.println("What do you want to do \n1.Search doctor\n2.Search Patient"
+			System.out.println("What do you want to do \n1.Search doctor\n2.Search Patient"
 							+ "\n3.Take Appointment \n4.Enter new Doctor");
 			int choice = scanner.nextInt();
 			switch (choice) {

@@ -1,3 +1,10 @@
+/***********************************************
+ * Purpose :This program add,delete,edit records in address book​
+ *           
+ * @author  Sujit Chincholkar
+ * @version 1.0
+ * @since   24/08/2017          
+ ***********************************************/
 package com.bridgelabz.programs;
 
 import java.util.HashMap;
@@ -7,6 +14,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.bridgelabz.utility.Utility;
+
 
 public class AddressBook {
 	static Scanner scanner=new Scanner(System.in);
@@ -35,6 +43,9 @@ public class AddressBook {
 			break;
 		}
 	}
+	/**This method search record from file by first name
+	 * @param file
+	 */
 	public void search(String file) {
 		System.out.println("Enter name to search");
 		String valueToSearch=scanner.next();
@@ -49,6 +60,9 @@ public class AddressBook {
 		}
 		
 	}
+	/**This method prints data in sorted order read from file.
+	 * @param file
+	 */
 	public  void sortByName(String file) {
 		JSONArray bookRecords=Utility.readJSONArray(file);
 		JSONObject temporary;
@@ -67,6 +81,9 @@ public class AddressBook {
 		}
 		display(bookRecords);
 	}
+	/**This method read data and delete specified record from file.
+	 * @param file
+	 */
 	public void deleteRecord(String file) {
 		JSONArray bookRecords=Utility.readJSONArray(file);
 		System.out.println("Enter First name to delete record");
@@ -99,7 +116,7 @@ public class AddressBook {
 		String choice[]={"firstname","laststname","address","city","state","zip","phone"};
 		System.out.println("Enter first name of record which you wants to edit");
 		String name=scanner.next();
-		System.out.println("What you want to edit \n1.FirstName\n2.LastName\n3.Address\n4.City"
+		System.out.println("What do you want to edit \n1.FirstName\n2.LastName\n3.Address\n4.City"
 				+ "\n5.state\n6.Zip\n7.Phone Number");
 		int choiceIndex=scanner.nextInt();
 		System.out.println("Enter "+choice[choiceIndex-1]);

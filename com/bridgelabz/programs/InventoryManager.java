@@ -1,3 +1,11 @@
+/***********************************************
+ * Purpose :This program Create​ ​ InventoryManager​ ​ to​ ​ manage​ ​ the
+ * 			Inventory.​
+ *           
+ * @author  Sujit Chincholkar
+ * @version 1.0
+ * @since   24/08/2017          
+ ***********************************************/
 package com.bridgelabz.programs;
 
 import java.util.Scanner;

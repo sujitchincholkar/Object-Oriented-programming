@@ -1,3 +1,10 @@
+/***********************************************
+ * Purpose :This program implements method used to buy or sell stock.​
+ *           
+ * @author  Sujit Chincholkar
+ * @version 1.0
+ * @since   24/08/2017          
+ ***********************************************/
 package com.bridgelabz.programs;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +37,10 @@ public class StockAccount {
 		}
 		return valueOfAccount;
 	}
+	/**This method buy stock of given amount and symbol.
+	 * @param amount
+	 * @param symbol
+	 */
 	public void buy(int amount,String symbol){
 		
 		System.out.println("Enter price per share for "+symbol);
@@ -42,6 +53,10 @@ public class StockAccount {
 		dateTimeQueue.enqueue(dateTime);
 		companylist.add(share);
 	}
+	/**This method sell specified stock.
+	 * @param amount
+	 * @param symbol
+	 */
 	public void sell(int amount,String symbol){
 		int index=0;
 		for(index=0;index<companylist.size();index++){
@@ -62,6 +77,9 @@ public class StockAccount {
 			System.out.println("number of shares to sell is greater than actual shares");
 		}
 	}
+	/**This method save the changes on file
+	 * @param file -file path
+	 */
 	public void save(String file){
 		ArrayList<String> list=new ArrayList<>();
 		for(int i=0;i<companylist.size();i++){

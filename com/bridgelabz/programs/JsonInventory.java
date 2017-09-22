@@ -1,3 +1,10 @@
+/***********************************************
+ * Purpose :​
+ *           
+ * @author  Sujit Chincholkar
+ * @version 1.0
+ * @since   24/08/2017          
+ ***********************************************/
 package com.bridgelabz.programs;
 
 import java.io.File;
@@ -15,8 +22,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.bridgelabz.utility.Utility;
-
-
 
 public class JsonInventory {
 	public static void main(String args[]) throws FileNotFoundException, IOException, ParseException{

@@ -1,3 +1,10 @@
+/***********************************************
+ * Purpose :This program crrates new Inventory Object.​
+ *           
+ * @author  Sujit Chincholkar
+ * @version 1.0
+ * @since   24/08/2017          
+ ***********************************************/
 package com.bridgelabz.programs;
 
 import java.io.FileNotFoundException;
@@ -20,6 +27,11 @@ import org.json.simple.parser.ParseException;
 import com.bridgelabz.utility.Utility;
 
 public class InventoryFactory {
+	/**This method accecpt the inventory for specified items and for given properties
+	 * @param items
+	 * @param property
+	 * @return
+	 */
 	public static JSONObject createInventory(String items[],String property[]){
 		JSONObject inventoryObj=new JSONObject();
 		
@@ -46,6 +58,9 @@ public class InventoryFactory {
 		}
 		return inventoryObj;
 	}
+	/**This method reads json from file calculate total value of items.
+	 * @param file -File name with absolute path.
+	 */
 	public void calculateInventory(String file){
 		JSONObject inventory=Utility.readJSONFile(file);
 		Set keyList =  inventory.keySet();
