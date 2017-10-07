@@ -256,6 +256,7 @@ public class Utility {
 					doctor.put("Appointments",Integer.parseInt((doctor.get("Appointments"))+"")+1);
 					writeJSONFile(doctorFile,doctorList);
 					writeJSONFile(patientFile,patientList);
+					System.out.println("Appointment Successful");
 				}else {
 					System.out.println("Sorry Dr."+name+" is not available");
 				}

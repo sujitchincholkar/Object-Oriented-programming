@@ -22,6 +22,8 @@ public class AddressBook {
 		AddressBook book=new AddressBook();
 		String file="/home/bridgeit/Documents/AddressBook";
 		book.display(Utility.readJSONArray(file));
+		char ans='y';
+		while(ans=='y'||ans=='Y'){
 		System.out.println("Enter your choice \n1.Add \n2.Edit \n3.Delete \n4.Sort By Name "
 				+ "\n5.Search By Name");
 		int choice=scanner.nextInt();
@@ -42,6 +44,9 @@ public class AddressBook {
 			book.search(file);
 			break;
 		}
+		System.out.println("Do you want to Continue[Y/N]");
+		ans=scanner.next().charAt(0);
+	}
 	}
 	/**This method search record from file by first name
 	 * @param file
